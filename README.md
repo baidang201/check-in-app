@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 打卡应用 (Check-In App)
 
-## Getting Started
+Next.js + Prisma (MongoDB) 实战教学项目
 
-First, run the development server:
+## 课前准备
+
+### 1. 配置数据库连接
+
+1. 注册 [MongoDB Atlas](https://www.mongodb.com/atlas) 免费账号
+2. 创建免费集群，获取连接串
+3. "cp env.example .env", 编辑 `.env` 文件，替换连接串DATABASE_URL
+
+### 2. 安装依赖
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. 生成 Prisma 客户端
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx prisma generate
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 常用命令
 
-## Learn More
+| 命令 | 说明 |
+|------|------|
+| `npx prisma studio` | 打开可视化数据库管理界面 |
+| `npx prisma db push` | 将 Schema 同步到数据库 |
+| `npx prisma generate` | 生成 Prisma 客户端 |
 
-To learn more about Next.js, take a look at the following resources:
+## 课程学习路径
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **选型分析**：使用「5问选型法」确定数据库类型
+2. **模型设计**：用自然语言描述需求，AI 生成 Prisma Schema
+3. **数据同步**：执行 push，将模型同步到 MongoDB Atlas
+4. **增删改查**：通过 Prisma Studio 或 API 操作数据
+5. **报错排查**：掌握常见错误的解决方法
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 数据模型设计
 
-## Deploy on Vercel
+参考 Schema 文件 `prisma/schema.prisma`，包含：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **CheckIn（打卡记录）**：支持灵活字段（健身/读书/工作等）
+- 不需要预先定义所有字段，体现非关系型的灵活性
+- 支持嵌套数据、数组类型
